@@ -124,7 +124,7 @@ with gr.Blocks(
     history = gr.State([])
     token_count = gr.State([])
     promptTemplates = gr.State(load_template(get_template_names(plain=True)[0], mode=2))
-    user_api_key = gr.State(my_api_key)
+    # user_api_key = gr.State(my_api_key)
     TRUECOMSTANT = gr.State(True)
     FALSECONSTANT = gr.State(False)
     topic = gr.State("未命名对话历史记录")
@@ -284,7 +284,7 @@ with gr.Blocks(
     user_input.submit(
         predict,
         [
-            user_api_key,
+            my_api_key,
             systemPromptTxt,
             history,
             user_input,
