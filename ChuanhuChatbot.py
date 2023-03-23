@@ -438,23 +438,9 @@ logging.info(
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
 demo.title = "GPT私人小秘"
 
+def auth(user_name, pwd):
+    return True
+
 if __name__ == "__main__":
     reload_javascript()
-    # if running in Docker
-    if dockerflag:
-        if authflag:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(
-                server_name="0.0.0.0", server_port=7860, auth=(username, password),
-                favicon_path="./assets/favicon.png"
-            )
-        else:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False, favicon_path="./assets/favicon.png")
-    # if not running in Docker
-    else:
-        if authflag:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, auth=(username, password), favicon_path="./assets/favicon.png", inbrowser=True)
-        else:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
-        # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False) # 可自定义端口
-        # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860,auth=("在这里填写用户名", "在这里填写密码")) # 可设置用户名与密码
-        # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(auth=("在这里填写用户名", "在这里填写密码")) # 适合Nginx反向代理
+    demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True, auth = auth())  # 改为 share=True 可以创建公开分享链接
