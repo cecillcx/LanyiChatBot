@@ -1,4 +1,4 @@
-<h1 align="center">川虎 ChatGPT 🐯 Chuanhu ChatGPT</h1>
+<h1 align="center">ChatGPT</h1>
 <div align="center">
   <a href="https://github.com/GaiZhenBiao/ChuanhuChatGPT">
     <img src="https://user-images.githubusercontent.com/70903329/227087087-93b37d64-7dc3-4738-a518-c1cf05591c8a.png" alt="Logo" height="156">
@@ -362,7 +362,7 @@ DOMAIN-SUFFIX,openai.com,你的代理规则
 
 <details><summary><code>TypeError: Base.set () got an unexpected keyword argument</code></summary>
 
-这是因为川虎ChatGPT紧跟Gradio发展步伐，你的Gradio版本太旧了。请升级依赖：
+这你的Gradio版本太旧了。请升级依赖：
 
 ```
 pip install -r requirements.txt --upgrade

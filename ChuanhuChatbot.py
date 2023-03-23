@@ -25,6 +25,7 @@ else:
 
 authflag = False
 
+api_key_path = "../svr_stuff/api_key.txt"
 if dockerflag:
     my_api_key = os.environ.get("my_api_key")
     if my_api_key == "empty":
@@ -38,10 +39,10 @@ if dockerflag:
 else:
     if (
         not my_api_key
-        and os.path.exists("api_key.txt")
-        and os.path.getsize("api_key.txt")
+        and os.path.exists(api_key_path)
+        and os.path.getsize(api_key_path)
     ):
-        with open("api_key.txt", "r") as f:
+        with open(api_key_path, "r") as f:
             my_api_key = f.read().strip()
     if os.path.exists("auth.json"):
         with open("auth.json", "r") as f:
@@ -433,7 +434,7 @@ logging.info(
     + colorama.Style.RESET_ALL
 )
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
-demo.title = "川虎ChatGPT 🚀"
+demo.title = "GPT私人小秘"
 
 if __name__ == "__main__":
     reload_javascript()
@@ -451,7 +452,7 @@ if __name__ == "__main__":
         if authflag:
             demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, auth=(username, password), favicon_path="./assets/favicon.png", inbrowser=True)
         else:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/favicon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
+            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False) # 可自定义端口
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860,auth=("在这里填写用户名", "在这里填写密码")) # 可设置用户名与密码
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(auth=("在这里填写用户名", "在这里填写密码")) # 适合Nginx反向代理
