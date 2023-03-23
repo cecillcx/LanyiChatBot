@@ -250,7 +250,6 @@ def predict_all(
 
 
 def predict(
-    openai_api_key,
     system_prompt,
     history,
     inputs,
@@ -264,6 +263,7 @@ def predict(
     files = None,
     should_check_token_count=True,
 ):  # repetition_penalty, top_k
+    openai_api_key = os.environ.get("my_api_key")
     logging.info("输入为：" + colorama.Fore.BLUE + f"{inputs}" + colorama.Style.RESET_ALL)
     if files:
         msg = "构建索引中……（这可能需要比较久的时间）"

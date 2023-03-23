@@ -52,6 +52,7 @@ else:
             if username != "" and password != "":
                 authflag = True
 
+os.environ["OPENAI_API_KEY"] = my_api_key
 gr.Chatbot.postprocess = postprocess
 PromptHelper.compact_text_chunks = compact_text_chunks
 
@@ -284,7 +285,6 @@ with gr.Blocks(
     user_input.submit(
         predict,
         [
-            my_api_key,
             systemPromptTxt,
             history,
             user_input,
