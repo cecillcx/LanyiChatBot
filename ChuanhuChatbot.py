@@ -306,7 +306,6 @@ with gr.Blocks(
     submitBtn.click(
         predict,
         [
-            user_api_key,
             systemPromptTxt,
             history,
             user_input,
