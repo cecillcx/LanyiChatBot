@@ -130,11 +130,12 @@ with gr.Blocks(
     FALSECONSTANT = gr.State(False)
     topic = gr.State("未命名对话历史记录")
 
-    ''' 隐藏 IP 地区
+    
     with gr.Row():
         gr.HTML(title)
-        status_display = gr.Markdown(get_geoip(), elem_id="status_display")
-    '''
+        # status_display = gr.Markdown(get_geoip(), elem_id="status_display")
+        status_display = gr.Markdown("", elem_id="status_display")
+    
     with gr.Row(scale=1).style(equal_height=True):
         with gr.Column(scale=5):
             with gr.Row(scale=1):
@@ -177,7 +178,6 @@ with gr.Blocks(
                     use_websearch_checkbox = gr.Checkbox(label="使用在线搜索", value=False)
                     index_files = gr.Files(label="上传索引文件", type="file", multiple=True)
 
-                '''
                 with gr.Tab(label="Prompt"):
                     systemPromptTxt = gr.Textbox(
                         show_label=True,
@@ -210,7 +210,6 @@ with gr.Blocks(
                                             get_template_names(plain=True)[0], mode=1
                                         )[0],
                                     ).style(container=False)
-                '''
                 
                 with gr.Tab(label="保存/加载"):
                     with gr.Accordion(label="保存/加载对话历史记录", open=True):
@@ -240,7 +239,7 @@ with gr.Blocks(
                             with gr.Row():
                                 with gr.Column():
                                     downloadFile = gr.File(interactive=True)
-
+                
                 with gr.Tab(label="高级"):
                     default_btn = gr.Button("🔙 恢复默认设置")
                     gr.Markdown("# ⚠️ 务必谨慎更改 ⚠️\n\n如果无法使用请恢复默认设置")
@@ -279,6 +278,7 @@ with gr.Blocks(
                         lines=2,
                     )
                     changeProxyBtn = gr.Button("🔄 设置代理地址")
+                
 
     gr.Markdown(description)
 
