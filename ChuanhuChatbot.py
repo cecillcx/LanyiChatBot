@@ -332,7 +332,6 @@ with gr.Blocks(
     retryBtn.click(
         retry,
         [
-            user_api_key,
             systemPromptTxt,
             history,
             chatbot,
