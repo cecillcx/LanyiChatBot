@@ -128,7 +128,7 @@ def stream_predict(
     all_token_counts.append(user_token_count)
     logging.info(f"输入token计数: {user_token_count}")
     yield get_return_value()
-    openai_api_key = os.environ.get("my_api_key")
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
     try:
         response = get_response(
             openai_api_key,
@@ -217,7 +217,7 @@ def predict_all(
     else:
         chatbot.append((inputs, ""))
     all_token_counts.append(count_token(construct_user(inputs)))
-    openai_api_key = os.environ.get("my_api_key")
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
     try:
         response = get_response(
             system_prompt,
@@ -262,7 +262,7 @@ def predict(
     files = None,
     should_check_token_count=True,
 ):  # repetition_penalty, top_k
-    openai_api_key = os.environ.get("my_api_key")
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
     logging.info("输入为：" + colorama.Fore.BLUE + f"{inputs}" + colorama.Style.RESET_ALL)
     if files:
         msg = "构建索引中……（这可能需要比较久的时间）"
