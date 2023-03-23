@@ -438,9 +438,9 @@ logging.info(
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
 demo.title = "GPT私人小秘"
 
-def auth(user_name, pwd):
+def check_auth(user_name, pwd):
     return True
 
 if __name__ == "__main__":
     reload_javascript()
-    demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True, auth = auth())  # 改为 share=True 可以创建公开分享链接
+    demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True, auth = check_auth)  # 改为 share=True 可以创建公开分享链接
