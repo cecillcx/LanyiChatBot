@@ -156,6 +156,7 @@ with gr.Blocks(
         with gr.Column():
             with gr.Column(min_width=50, scale=1):
                 with gr.Tab(label="ChatGPT"):
+                    '''
                     keyTxt = gr.Textbox(
                         show_label=True,
                         placeholder=f"OpenAI API-key...",
@@ -164,6 +165,7 @@ with gr.Blocks(
                         visible=not HIDE_MY_KEY,
                         label="API-Key",
                     )
+                    '''
                     model_select_dropdown = gr.Dropdown(
                         label="选择模型", choices=MODELS, multiselect=False, value=MODELS[0]
                     )
@@ -276,8 +278,8 @@ with gr.Blocks(
 
     gr.Markdown(description)
 
-    keyTxt.submit(submit_key, keyTxt, [user_api_key, status_display])
-    keyTxt.change(submit_key, keyTxt, [user_api_key, status_display])
+    # keyTxt.submit(submit_key, keyTxt, [user_api_key, status_display])
+    # keyTxt.change(submit_key, keyTxt, [user_api_key, status_display])
     # Chatbot
     user_input.submit(
         predict,
@@ -452,7 +454,7 @@ if __name__ == "__main__":
         if authflag:
             demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, auth=(username, password), favicon_path="./assets/favicon.png", inbrowser=True)
         else:
-            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/icon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
+            demo.queue(concurrency_count=CONCURRENT_COUNT).launch(share=False, favicon_path="./assets/favicon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False) # 可自定义端口
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860,auth=("在这里填写用户名", "在这里填写密码")) # 可设置用户名与密码
         # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(auth=("在这里填写用户名", "在这里填写密码")) # 适合Nginx反向代理
