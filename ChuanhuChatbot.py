@@ -356,7 +356,6 @@ with gr.Blocks(
     reduceTokenBtn.click(
         reduce_token_size,
         [
-            user_api_key,
             systemPromptTxt,
             history,
             chatbot,

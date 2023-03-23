@@ -93,7 +93,6 @@ def get_response(
 
 
 def stream_predict(
-    openai_api_key,
     system_prompt,
     history,
     inputs,
@@ -129,6 +128,7 @@ def stream_predict(
     all_token_counts.append(user_token_count)
     logging.info(f"输入token计数: {user_token_count}")
     yield get_return_value()
+    openai_api_key = os.environ.get("my_api_key")
     try:
         response = get_response(
             openai_api_key,
@@ -198,7 +198,6 @@ def stream_predict(
 
 
 def predict_all(
-    openai_api_key,
     system_prompt,
     history,
     inputs,
@@ -218,9 +217,9 @@ def predict_all(
     else:
         chatbot.append((inputs, ""))
     all_token_counts.append(count_token(construct_user(inputs)))
+    openai_api_key = os.environ.get("my_api_key")
     try:
         response = get_response(
-            openai_api_key,
             system_prompt,
             history,
             temperature,
@@ -314,7 +313,6 @@ def predict(
     if stream:
         logging.info("使用流式传输")
         iter = stream_predict(
-            openai_api_key,
             system_prompt,
             history,
             inputs,
@@ -331,7 +329,6 @@ def predict(
     else:
         logging.info("不使用流式传输")
         chatbot, history, status_text, all_token_counts = predict_all(
-            openai_api_key,
             system_prompt,
             history,
             inputs,
@@ -364,7 +361,6 @@ def predict(
         logging.info(status_text)
         yield chatbot, history, status_text, all_token_counts
         iter = reduce_token_size(
-            openai_api_key,
             system_prompt,
             history,
             chatbot,
@@ -380,7 +376,6 @@ def predict(
 
 
 def retry(
-    openai_api_key,
     system_prompt,
     history,
     chatbot,
@@ -398,7 +393,6 @@ def retry(
     inputs = history.pop()["content"]
     token_count.pop()
     iter = predict(
-        openai_api_key,
         system_prompt,
         history,
         inputs,
@@ -416,7 +410,6 @@ def retry(
 
 
 def reduce_token_size(
-    openai_api_key,
     system_prompt,
     history,
     chatbot,
@@ -428,7 +421,6 @@ def reduce_token_size(
 ):
     logging.info("开始减少token数量……")
     iter = predict(
-        openai_api_key,
         system_prompt,
         history,
         summarize_prompt,
