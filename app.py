@@ -438,22 +438,6 @@ logging.info(
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
 demo.title = "GPT私人小秘"
 
-    
-import gradio as gr
-
-# 自定义身份验证函数
-def check_auth(username, password):
-    return True
-
-if __name__ == "__main__":
-    reload_javascript()
-    iface = gr.Interface(fn=check_auth, 
-                     inputs=[gr.inputs.Textbox("Username"), gr.inputs.Password("Password")], 
-                     outputs=gr.outputs.Textbox(),
-                     title="Authentication",
-                     auth=check_auth)
-    iface.launch()
-    
-    demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False, auth = check_auth, favicon_path="./assets/icon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
+if __name__ == "__main__":    
+    demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False, favicon_path="./assets/icon.ico", inbrowser=True)  # 改为 share=True 可以创建公开分享链接
     # demo.queue(concurrency_count=CONCURRENT_COUNT).launch(server_name="0.0.0.0", server_port=7860, share=False) # 可自定义端口
-    
